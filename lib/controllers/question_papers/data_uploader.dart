@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_study_app/firebase/loading_status.dart';
 import 'package:flutter_study_app/models/models.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +16,11 @@ class DataUploader extends GetxController {
     super.onReady();
   }
 
-  void uploadData() async {
+  final loadingStatus = LoadingStatus.loading.obs;
+
+  Future<void> uploadData() async {
+    loadingStatus.value = LoadingStatus.loading;
+
     final firestore = FirebaseFirestore.instance;
     final manifestContent = await DefaultAssetBundle.of(Get.context!)
         .loadString('AssetManifest.json');
@@ -45,10 +50,25 @@ class DataUploader extends GetxController {
       });
 
       for (var questions in paper.questions!) {
-        
+        final questionPath = questionRF(
+          questionPaperId: paper.id,
+          questionId: questions.id,
+        );
+        batch.set(questionPath, {
+          'question': questions.question,
+          'corret_answer': questions.correctAnswer,
+        });
+
+        for (var answer in questions.answers) {
+          batch.set(questionPath.collection('ansers').doc(answer.identifier), {
+            'identifier': answer.identifier,
+            'answer': answer.answer,
+          });
+        }
       }
     }
 
     await batch.commit();
+    loadingStatus.value = LoadingStatus.completed;
   }
 }

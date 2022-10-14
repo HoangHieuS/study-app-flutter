@@ -1,12 +1,12 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_study_app/firebase_options.dart';
-import 'package:flutter_study_app/screens/screens.dart';
+import 'package:flutter_study_app/bindings/initial_bindings.dart';
+import 'package:flutter_study_app/configs/themes/themes.dart';
+import 'package:flutter_study_app/routes.dart';
 import 'package:get/get.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  InitialBindings().dependencies();
   runApp(const MyApp());
 }
 
@@ -16,11 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: DataUploadScreen(),
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Study App',
+      theme: LightTheme().buildLightTheme(),
+      getPages: Routes.routes(),
     );
   }
 }
