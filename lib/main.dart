@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study_app/bindings/initial_bindings.dart';
-import 'package:flutter_study_app/configs/themes/themes.dart';
+import 'package:flutter_study_app/controllers/controllers.dart';
 import 'package:flutter_study_app/routes.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Study App',
-      theme: LightTheme().buildLightTheme(),
+      theme: Get.find<ThemeController>().lightTheme,
       getPages: Routes.routes(),
     );
   }
