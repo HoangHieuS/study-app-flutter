@@ -19,7 +19,8 @@ class CircleButton extends StatelessWidget {
       type: MaterialType.transparency,
       clipBehavior: Clip.hardEdge,
       shape: const CircleBorder(),
-      child: Ink(
+      child: InkWell(
+        onTap: onTap,
         child: child,
       ),
     );

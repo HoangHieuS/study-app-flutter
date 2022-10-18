@@ -13,7 +13,7 @@ class IntroductionScreen extends StatelessWidget {
       body: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          gradient: mainGradient(context),
+          gradient: mainGradient(),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: Get.width * 0.2),
@@ -35,7 +35,10 @@ class IntroductionScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               CircleButton(
-                onTap: () {},
+                onTap: () {
+                  Get.offAndToNamed('/home');
+                  print('tapped');
+                },
                 child: const Icon(
                   Icons.arrow_forward,
                   size: 35,
