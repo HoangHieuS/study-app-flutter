@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_study_app/widgets/widgets.dart';
 import 'package:get/get.dart';
 
-import '../configs/themes/colors.dart';
+import '../../../configs/themes/colors.dart';
 
 class IntroductionScreen extends StatelessWidget {
   const IntroductionScreen({super.key});
@@ -35,10 +35,7 @@ class IntroductionScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               CircleButton(
-                onTap: () {
-                  Get.offAndToNamed('/home');
-                  print('tapped');
-                },
+                onTap: () => Get.offAndToNamed('/home'),
                 child: const Icon(
                   Icons.arrow_forward,
                   size: 35,

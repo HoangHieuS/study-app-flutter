@@ -1,7 +1,8 @@
 import 'package:flutter_study_app/controllers/controllers.dart';
 import 'package:get/get.dart';
 
-import 'screens/screens.dart';
+import 'features/home/controllers/home_controller.dart';
+import 'features/features.dart';
 
 class Routes {
   static List<GetPage> routes() => [
@@ -12,13 +13,13 @@ class Routes {
         GetPage(
           name: '/introduction',
           page: () => const IntroductionScreen(),
-         
         ),
         GetPage(
           name: '/home',
           page: () => const HomeScreen(),
           binding: BindingsBuilder(() {
             Get.put(QuestionPaperController());
+            Get.put(HomeController());
           }),
         ),
       ];

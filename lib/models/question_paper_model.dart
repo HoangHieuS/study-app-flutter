@@ -7,7 +7,7 @@ class QuestionPaperModel {
   final String description;
   final int timeSeconds;
   final List<Questions>? questions;
-  final int questionCount;
+  final int questionsCount;
 
   QuestionPaperModel({
     required this.id,
@@ -16,7 +16,7 @@ class QuestionPaperModel {
     required this.description,
     required this.timeSeconds,
     this.questions,
-    required this.questionCount,
+    required this.questionsCount,
   });
 
   QuestionPaperModel.fromJson(Map<String, dynamic> json)
@@ -25,7 +25,7 @@ class QuestionPaperModel {
         imageUrl = json['image_url'] as String,
         description = json['Description'] as String,
         timeSeconds = json['time_seconds'],
-        questionCount = 0,
+        questionsCount = 0,
         questions = (json['questions'] as List)
             .map((dynamic e) => Questions.fromJson(e as Map<String, dynamic>))
             .toList();
@@ -36,8 +36,10 @@ class QuestionPaperModel {
         imageUrl = json['image_url'],
         description = json['description'],
         timeSeconds = json['time_seconds'],
-        questionCount = json['questions_count'] as int,
+        questionsCount = json['questions_count'] as int,
         questions = [];
+
+  String timeInMinutes() => '${(timeSeconds / 60).ceil()} mins';
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
