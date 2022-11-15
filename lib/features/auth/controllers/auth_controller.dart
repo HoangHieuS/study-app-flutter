@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_study_app/features/features.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../../widgets/core/commom/app_logger.dart';
+import '../../../core/commom/app_logger.dart';
 import '../../../firebase/references.dart';
-import '../../../widgets/dialog/dialog_widget.dart';
+import '../../../core/dialog/dialog_widget.dart';
+import '../screens/login_screen.dart';
 
 class AuthController extends GetxController {
   @override
@@ -40,10 +42,16 @@ class AuthController extends GetxController {
 
         await _auth.signInWithCredential(credential);
         saveUser(account);
+        navigateToHomeScreen();
       }
     } on FirebaseAuthException catch (e) {
       AppLogger.e(e);
     }
+  }
+
+  User? getUser() {
+    _user.value = _auth.currentUser;
+    return _user.value;
   }
 
   void saveUser(GoogleSignInAccount user) async {
@@ -63,14 +71,32 @@ class AuthController extends GetxController {
       Dialogs.questionStartDialogue(
         onTap: () {
           Get.back();
-
+          navigateToLoginScreen();
         },
       ),
       barrierDismissible: false,
     );
   }
 
-  bool isLoggedIn(){
+  void navigateToLoginScreen() {
+    Get.toNamed(LoginScreen.routeName);
+  }
+
+  bool isLoggedIn() {
     return _auth.currentUser != null;
+  }
+
+  Future<void> signOut() async {
+    AppLogger.d('Sign Out');
+    try {
+      await _auth.signOut();
+      navigateToHomeScreen();
+    } on FirebaseAuthException catch (e) {
+      AppLogger.e(e);
+    }
+  }
+
+  void navigateToHomeScreen() {
+    Get.offAllNamed(HomeScreen.routeName);
   }
 }

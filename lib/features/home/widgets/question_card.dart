@@ -5,7 +5,9 @@ import 'package:flutter_study_app/models/models.dart';
 import 'package:flutter_study_app/features/home/widgets/custom_icon_text.dart';
 import 'package:get/get.dart';
 
-class QuestionCard extends StatelessWidget {
+import '../../../controllers/question_papers/quiz_paper_controller.dart';
+
+class QuestionCard extends GetView<QuizPaperController> {
   final QuestionPaperModel model;
   const QuestionCard({
     super.key,
@@ -27,7 +29,7 @@ class QuestionCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          print('${model.title}');
+          controller.navigateToQuestions(paper: model);
         },
         child: Padding(
           padding: const EdgeInsets.all(_padding),

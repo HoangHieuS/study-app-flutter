@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../firebase/references.dart';
 
-class QuestionPaperController extends GetxController {
+class QuizPaperController extends GetxController {
   final allPapers = <QuestionPaperModel>[].obs;
 
   @override
@@ -44,7 +44,7 @@ class QuestionPaperController extends GetxController {
         Get.back();
         //Get.offNamed(page);
       } else {
-       // Get.toNamed('/questions', arguments: paper);
+        // Get.toNamed('/questions', arguments: paper);
       }
     } else {
       _authController.showLoginAleartDialogue();

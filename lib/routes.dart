@@ -1,4 +1,5 @@
 import 'package:flutter_study_app/controllers/controllers.dart';
+import 'package:flutter_study_app/features/auth/screens/login_screen.dart';
 import 'package:get/get.dart';
 
 import 'features/home/controllers/home_controller.dart';
@@ -15,12 +16,16 @@ class Routes {
           page: () => const IntroductionScreen(),
         ),
         GetPage(
-          name: '/home',
+          name: HomeScreen.routeName,
           page: () => const HomeScreen(),
           binding: BindingsBuilder(() {
-            Get.put(QuestionPaperController());
+            Get.put(QuizPaperController());
             Get.put(HomeController());
           }),
+        ),
+         GetPage(
+          name: LoginScreen.routeName,
+          page: () => const LoginScreen(),
         ),
       ];
 }

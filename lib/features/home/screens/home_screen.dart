@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study_app/configs/themes/themes.dart';
-import 'package:flutter_study_app/controllers/question_papers/question_paper_controller.dart';
+import 'package:flutter_study_app/controllers/question_papers/quiz_paper_controller.dart';
 import 'package:flutter_study_app/features/home/widgets/content_area.dart';
 import 'package:flutter_study_app/features/features.dart';
-import 'package:flutter_study_app/widgets/circle_button.dart';
+import 'package:flutter_study_app/core/circle_button.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:flutter_study_app/features/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
+import '../../auth/controllers/auth_controller.dart';
+
 class HomeScreen extends GetView<HomeController> {
+  static const String routeName = '/home';
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    QuestionPaperController quesitonController = Get.find();
+    QuizPaperController quesitonController = Get.find();
+    final user = Get.find<AuthController>().getUser();
     return Scaffold(
       body: GetBuilder<HomeController>(
         builder: (_) {
@@ -51,7 +55,7 @@ class HomeScreen extends GetView<HomeController> {
                               children: [
                                 const Icon(AppIcons.peace),
                                 Text(
-                                  'Hello friend',
+                                  user != null ? 'Hello ${user.displayName}': 'Hello Friend',
                                   style: detailText.copyWith(
                                       color: onSurfaceTextColor),
                                 ),
