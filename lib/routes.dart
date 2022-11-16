@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'features/home/controllers/home_controller.dart';
 import 'features/features.dart';
+import 'features/question/controller/question_controller.dart';
 
 class Routes {
   static List<GetPage> routes() => [
@@ -23,9 +24,16 @@ class Routes {
             Get.put(HomeController());
           }),
         ),
-         GetPage(
+        GetPage(
           name: LoginScreen.routeName,
           page: () => const LoginScreen(),
+        ),
+        GetPage(
+          name: QuestionScreen.routeName,
+          page: () => const QuestionScreen(),
+          binding: BindingsBuilder(() {
+            Get.put(QuestionController());
+          }),
         ),
       ];
 }

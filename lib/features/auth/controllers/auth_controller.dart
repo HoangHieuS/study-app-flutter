@@ -32,16 +32,16 @@ class AuthController extends GetxController {
   void signInWithGoogle() async {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
     try {
-      GoogleSignInAccount? account = await _googleSignIn.signIn();
-      if (account != null) {
-        final _authAccount = await account.authentication;
-        final credential = GoogleAuthProvider.credential(
+      GoogleSignInAccount? user = await _googleSignIn.signIn();
+      if (user != null) {
+        final _authAccount = await user.authentication;
+        final _credential = GoogleAuthProvider.credential(
           accessToken: _authAccount.accessToken,
           idToken: _authAccount.idToken,
         );
 
-        await _auth.signInWithCredential(credential);
-        saveUser(account);
+        await _auth.signInWithCredential(_credential);
+        await saveUser(user);
         navigateToHomeScreen();
       }
     } on FirebaseAuthException catch (e) {
@@ -54,7 +54,7 @@ class AuthController extends GetxController {
     return _user.value;
   }
 
-  void saveUser(GoogleSignInAccount user) async {
+  saveUser(GoogleSignInAccount user) async {
     userRF.doc(user.email).set({
       'email': user.email,
       'name': user.displayName,

@@ -6,7 +6,7 @@ class QuestionPaperModel {
   String? imageUrl;
   final String description;
   final int timeSeconds;
-  final List<Questions>? questions;
+  List<Questions>? questions;
   final int questionsCount;
 
   QuestionPaperModel({
@@ -56,7 +56,7 @@ class QuestionPaperModel {
 class Questions {
   final String id;
   final String question;
-  final List<Answers> answers;
+  List<Answers> answers;
   final String correctAnswer;
 
   Questions({
@@ -72,6 +72,15 @@ class Questions {
         answers =
             (json['answers'] as List).map((e) => Answers.fromJson(e)).toList(),
         correctAnswer = json['correct_answer'];
+
+  Questions.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
+      : id = snapshot.id,
+        question = snapshot['question'],
+        correctAnswer = snapshot['correct_answer'],
+        answers = [];
+        // (snapshot['answers'] as List)
+        //     .map((e) => Answers.fromJson(e))
+        //     .toList();
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -95,6 +104,10 @@ class Answers {
   Answers.fromJson(Map<String, dynamic> json)
       : identifier = json['identifier'],
         answer = json['Answer'];
+
+  Answers.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
+      : identifier = snapshot['identifier'],
+        answer = snapshot['answer'];
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

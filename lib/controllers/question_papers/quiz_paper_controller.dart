@@ -4,6 +4,7 @@ import 'package:flutter_study_app/models/models.dart';
 import 'package:flutter_study_app/services/firebase_service.dart';
 import 'package:get/get.dart';
 
+import '../../features/question/screens/question_screen.dart';
 import '../../firebase/references.dart';
 
 class QuizPaperController extends GetxController {
@@ -44,7 +45,7 @@ class QuizPaperController extends GetxController {
         Get.back();
         //Get.offNamed(page);
       } else {
-        // Get.toNamed('/questions', arguments: paper);
+        Get.toNamed(QuestionScreen.routeName, arguments: paper);
       }
     } else {
       _authController.showLoginAleartDialogue();
