@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_study_app/configs/themes/custom_text_style.dart';
 import 'package:flutter_study_app/configs/themes/themes.dart';
 import 'package:flutter_study_app/core/commom/custom_bg.dart';
 import 'package:flutter_study_app/core/commom/main_button.dart';
 import 'package:flutter_study_app/features/home/widgets/content_area.dart';
 import 'package:flutter_study_app/features/question/controller/question_controller.dart';
-import 'package:flutter_study_app/features/question/widgets/answer_card.dart';
+import 'package:flutter_study_app/features/question/screens/screens.dart';
+import 'package:flutter_study_app/features/question/widgets/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../../firebase/loading_status.dart';
-import '../widgets/question_screen_holder.dart';
 
 class QuestionScreen extends GetView<QuestionController> {
   static const String routeName = '/question-screen';
@@ -18,6 +17,33 @@ class QuestionScreen extends GetView<QuestionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: CustomAppBar(
+        leading: Container(
+          decoration: const ShapeDecoration(
+            shape: StadiumBorder(
+              side: BorderSide(
+                color: onSurfaceTextColor,
+                width: 2,
+              ),
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: Obx(
+            () => CountdownTimer(
+              time: controller.time.value,
+              color: onSurfaceTextColor,
+            ),
+          ),
+        ),
+        showActionIcon: true,
+        titleWidget: Obx(
+          () => Text(
+            'Q. ${(controller.questionIndex.value + 1).toString().padLeft(2, '0')}',
+            style: appBarText,
+          ),
+        ),
+      ),
       body: CustomBackground(
         child: Obx(
           () => Column(
@@ -101,7 +127,7 @@ class QuestionScreen extends GetView<QuestionController> {
                               LoadingStatus.completed,
                           child: MainButton(
                             onTap: () => controller.isLastQuestion
-                                ? Container()
+                                ? Get.toNamed(TestOverviewScreen.routeName)
                                 : controller.nextQuestion(),
                             title:
                                 controller.isLastQuestion ? 'Complete' : 'Next',

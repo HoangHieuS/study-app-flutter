@@ -15,4 +15,8 @@ class AppIcons {
     0xE806,
     fontFamily: fontFam,
   );
+  static const IconData menu = IconData(
+    0xE804,
+    fontFamily: fontFam,
+  );
 }

@@ -32,8 +32,12 @@ class Routes {
           name: QuestionScreen.routeName,
           page: () => const QuestionScreen(),
           binding: BindingsBuilder(() {
-            Get.put(QuestionController());
+            Get.put<QuestionController>(QuestionController());
           }),
+        ),
+        GetPage(
+          name: TestOverviewScreen.routeName,
+          page: () => const TestOverviewScreen(),
         ),
       ];
 }

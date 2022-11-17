@@ -20,3 +20,14 @@ const headerText = TextStyle(
   fontWeight: FontWeight.w700,
   color: onSurfaceTextColor,
 );
+const appBarText = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+  color: onSurfaceTextColor,
+);
+TextStyle countdownTimerText(context) => TextStyle(
+      letterSpacing: 2,
+      color: UIParameters.isDarkMode()
+          ? Theme.of(context).textTheme.bodyText1!.color
+          : Theme.of(context).primaryColor,
+    );

@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study_app/configs/themes/themes.dart';
 
+enum AnswerStatus {
+  correct,
+  wrong,
+  answered,
+  notAnswered,
+}
+
 class AnswerCard extends StatelessWidget {
   final String answer;
   final bool isSelected;
