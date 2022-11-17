@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study_app/configs/themes/colors.dart';
+import 'package:get/get.dart';
 
 class MainButton extends StatelessWidget {
   final String title;
@@ -36,9 +37,9 @@ class MainButton extends StatelessWidget {
                   Center(
                     child: Text(
                       title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: onSurfaceTextColor,
+                        color: Get.isDarkMode ? onSurfaceTextColor : Theme.of(context).primaryColor,
                       ),
                     ),
                   ),

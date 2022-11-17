@@ -49,6 +49,8 @@ dependencies:
   logger: ^1.1.0
   flutter_svg: ^1.1.6
   font_awesome_flutter: ^10.2.1
+  shimmer: ^2.0.0
+  easy_separator: ^1.0.1
 
 
 dev_dependencies:
