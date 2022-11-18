@@ -39,5 +39,9 @@ class Routes {
           name: TestOverviewScreen.routeName,
           page: () => const TestOverviewScreen(),
         ),
+        GetPage(
+          name: ResultScreen.routeName,
+          page: () => const ResultScreen(),
+        ),
       ];
 }

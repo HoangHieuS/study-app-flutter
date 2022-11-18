@@ -3,7 +3,7 @@ import 'package:flutter_study_app/configs/themes/themes.dart';
 
 enum AnswerStatus {
   correct,
-  wrong,
+  incorrect,
   answered,
   notAnswered,
 }

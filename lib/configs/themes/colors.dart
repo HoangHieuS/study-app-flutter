@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_study_app/configs/themes/themes.dart';
 
 const Color onSurfaceTextColor = Colors.white;
+const Color correctAnswerColor = Color(0xFF3AC3CB);
+const Color incorrectAnswerColor = Color(0xFFF85187);
+// const Color notAnsweredColor = Color(0xFF2A3C65);
 
 const mainGradientLight = LinearGradient(
   begin: Alignment.topLeft,
