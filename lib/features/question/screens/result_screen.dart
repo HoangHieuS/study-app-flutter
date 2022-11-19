@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study_app/configs/themes/custom_text_style.dart';
+import 'package:flutter_study_app/configs/themes/themes.dart';
 import 'package:flutter_study_app/core/commom/custom_bg.dart';
+import 'package:flutter_study_app/core/commom/main_button.dart';
+import 'package:flutter_study_app/features/features.dart';
 import 'package:flutter_study_app/features/home/widgets/content_area.dart';
 import 'package:flutter_study_app/features/question/controller/question_controller.dart';
 import 'package:flutter_study_app/features/question/controller/question_controller_extension.dart';
@@ -74,13 +77,40 @@ class ResultScreen extends GetView<QuestionController> {
                           return QuestionNumberCard(
                             index: index + 1,
                             status: _status,
-                            onTap: () => controller.jumpToQuestion(
-                              index,
-                              isGoback: false,
-                            ),
+                            onTap: () {
+                              controller.jumpToQuestion(
+                                index,
+                                isGoback: false,
+                              );
+                              Get.toNamed(AnswerCheckScreen.routeName);
+                            },
                           );
                         },
                         itemCount: controller.allQuestions.length,
+                      ),
+                    ),
+                    ColoredBox(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      child: Padding(
+                        padding: UIParameters.mobileScreenPadding,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: MainButton(
+                                onTap: () => controller.tryAgain(),
+                                color: Colors.blueGrey,
+                                title: 'Try again',
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            Expanded(
+                              child: MainButton(
+                                onTap: () => controller.saveTestResults(),
+                                title: 'Go home',
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

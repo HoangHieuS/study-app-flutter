@@ -43,5 +43,9 @@ class Routes {
           name: ResultScreen.routeName,
           page: () => const ResultScreen(),
         ),
+        GetPage(
+          name: AnswerCheckScreen.routeName,
+          page: () => const AnswerCheckScreen(),
+        ),
       ];
 }
